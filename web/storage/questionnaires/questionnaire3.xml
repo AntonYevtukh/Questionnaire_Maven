@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<questionnaire name="WWII history on Pacific war theatre (Green Elephant)">
+    <question body="How many fighters took part in the raid on the Pearl Harbor?">
+        <answer>353</answer>
+        <answer>414</answer>
+        <answer>I know nothing</answer>
+    </question>
+    <question body="What is the most famous fighter on Pacific?">
+        <answer>Mitsubishi A6M Zero</answer>
+        <answer>Tiger</answer>
+        <answer>Messerschmitt Bf-109</answer>
+        <answer>Iluyshin IL-2</answer>
+    </question>
+	<question body="Which air carriers took part in the raid on the Pearl Harbor?">
+        <answer>Akagi, Kaga, Sōryū, Hiryū, Shōkaku, Zuikaku</answer>
+        <answer>Iowa, New Jersey, Missouri, Wisconsin</answer>
+        <answer>Bismarck, Tirpitz, Graf Zeppelin</answer>
+		<answer>I know nothing</answer>
+    </question>
+</questionnaire>

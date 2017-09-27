@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<questionnaire name="Programming">
+    <question body="How often do you programming?">
+        <answer>Every day</answer>
+        <answer>Once a week</answer>
+        <answer>Once a month</answer>
+        <answer>As much, as I can</answer>
+		<answer>I'm not a programmer</answer>
+    </question>
+    <question body="Do you know Java programming language?">
+        <answer>Yes</answer>
+        <answer>No</answer>
+        <answer>A little bit</answer>
+        <answer>Not sure</answer>
+    </question>
+	<question body="Do you know C# programming language?">
+        <answer>Yes</answer>
+        <answer>No</answer>
+        <answer>A little bit</answer>
+        <answer>Not sure</answer>
+    </question>
+	<question body="Which IDE do you prefer to use?">
+        <answer>IntelliJ IDEA</answer>
+        <answer>NetBeans</answer>
+        <answer>Eclipce</answer>
+        <answer>Sublime + Console</answer>
+		<answer>Notepad + Console</answer>
+    </question>
+</questionnaire>

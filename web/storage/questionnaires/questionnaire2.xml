@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<questionnaire name="What's your opinion about the cources Prog.kiev.ua">
+    <question body="Which course are you studying?">
+        <answer>Java Start</answer>
+        <answer>Java OOP</answer>
+        <answer>Java Pro</answer>
+        <answer>Android development</answer>
+		<answer>Another cource</answer>
+		<answer>No one from above</answer>
+    </question>
+    <question body="The lectures are informative?">
+        <answer>Yes</answer>
+        <answer>No</answer>
+        <answer>It was possible to make it more informative</answer>
+        <answer>Not sure</answer>
+    </question>
+	<question body="Is there enough information received at the lecture to study the topic?">
+        <answer>Yes, more than enough</answer>
+        <answer>No, there is not too much information</answer>
+        <answer>It would be better to make the lectures longer</answer>
+    </question>
+	<question body="Do you have time to do your homework?">
+        <answer>Yes</answer>
+        <answer>No</answer>
+        <answer>From time to time, depends on homework</answer>
+    </question>
+	<question body="Do you visit English speaking club??">
+        <answer>Yes</answer>
+        <answer>No</answer>
+        <answer>I visited it several times</answer>
+    </question>
+	<question body="Do you like courses Prog.kiev.ua?">
+        <answer>Really like</answer>
+        <answer>A little bit</answer>
+        <answer>No, i'm disappointed</answer>
+    </question>
+</questionnaire>
