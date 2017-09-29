@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.config.ConfigClass;
+import app.config.GlobalVariables;
 import app.model.*;
 
 import javax.servlet.ServletException;
@@ -55,7 +55,7 @@ public class QuestionnairesController extends HttpServlet {
         List<List<AnswerStatistics>> questionnaireStatistics;
         Questionnaire questionnaire;
         int totallyVotes;
-        synchronized (ConfigClass.GLOBAL_LOCK) {
+        synchronized (GlobalVariables.GLOBAL_LOCK) {
             questionnaire = Questionnaires.getInstance().getNameQuestionnaireMap().get(questionnaireName);
             questionnaireStatistics = Statistics.getInstance().getQuestionnaireStatistics(questionnaireName);
             totallyVotes = Statistics.getInstance().getTotallyVotes(questionnaireName);

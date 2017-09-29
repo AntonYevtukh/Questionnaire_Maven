@@ -1,7 +1,6 @@
 package app;
 
-import app.config.ConfigClass;
-import app.model.Questionnaire;
+import app.config.GlobalVariables;
 import app.model.Questionnaires;
 import app.model.Statistics;
 import app.model.Users;
@@ -28,9 +27,9 @@ public class SaveLoadContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        File usersFile = new File(ConfigClass.STORAGE_PATH + "\\users" + ConfigClass.SAVE_FILE_EXTENSION);
-        ConfigClass.SERIALIZER.serialize(Users.getInstance(), usersFile);
-        File statisticsFile = new File(ConfigClass.STORAGE_PATH + "\\statistics" + ConfigClass.SAVE_FILE_EXTENSION);
-        ConfigClass.SERIALIZER.serialize(Statistics.getInstance(), statisticsFile);
+        File usersFile = new File(GlobalVariables.STORAGE_PATH + "\\users" + GlobalVariables.SAVE_FILE_EXTENSION);
+        GlobalVariables.SERIALIZER.serialize(Users.getInstance(), usersFile);
+        File statisticsFile = new File(GlobalVariables.STORAGE_PATH + "\\statistics" + GlobalVariables.SAVE_FILE_EXTENSION);
+        GlobalVariables.SERIALIZER.serialize(Statistics.getInstance(), statisticsFile);
     }
 }

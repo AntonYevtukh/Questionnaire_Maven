@@ -1,7 +1,6 @@
 package app.model;
 
-import app.config.ConfigClass;
-import app.utils.XmlSerializer;
+import app.config.GlobalVariables;
 
 import java.io.File;
 import java.io.Serializable;
@@ -23,10 +22,10 @@ public class Questionnaires implements Serializable {
 
         if (instance == null) {
             //TODO
-            File directory = new File(ConfigClass.QUESTIONNAIRE_PATH);
+            File directory = new File(GlobalVariables.QUESTIONNAIRE_PATH);
             if (directory.exists() && directory.isDirectory()) {
                 instance = new Questionnaires(directory.listFiles((File dir, String name) ->
-                        name.endsWith(ConfigClass.SAVE_FILE_EXTENSION)));
+                        name.endsWith(GlobalVariables.SAVE_FILE_EXTENSION)));
                                 //name.toLowerCase().indexOf("questionnaire") != -1));
             }
             else
@@ -40,7 +39,7 @@ public class Questionnaires implements Serializable {
     }
 
     private Questionnaires(File[] files) {
-        nameQuestionnaireMap = Arrays.stream(files).map(file -> ConfigClass.SERIALIZER.deserialize(
+        nameQuestionnaireMap = Arrays.stream(files).map(file -> GlobalVariables.SERIALIZER.deserialize(
                 Questionnaire.class, file)).collect(Collectors.toMap(Questionnaire::getName, Function.identity()));
     }
 

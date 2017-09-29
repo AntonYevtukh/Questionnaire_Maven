@@ -1,8 +1,6 @@
 package app.model;
 
-import app.config.ConfigClass;
-import app.controllers.UsersController;
-import app.utils.XmlSerializer;
+import app.config.GlobalVariables;
 import exceptions.PasswordMismatchException;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
@@ -30,9 +28,9 @@ public class Users implements Serializable {
     public static Users getInstance() {
 
         if (instance == null) {
-            File file = new File(ConfigClass.STORAGE_PATH + "\\users" + ConfigClass.SAVE_FILE_EXTENSION);
+            File file = new File(GlobalVariables.STORAGE_PATH + "\\users" + GlobalVariables.SAVE_FILE_EXTENSION);
             if (file.exists())
-                instance = ConfigClass.SERIALIZER.deserialize(Users.class, file);
+                instance = GlobalVariables.SERIALIZER.deserialize(Users.class, file);
             else
                 instance = new Users();
         }
@@ -56,7 +54,7 @@ public class Users implements Serializable {
             throws UserNotFoundException {
         if (!loginUserMap.containsKey(userName))
             throw new UserNotFoundException("User with login " + userName + "not exists. May be it has been already deleted");
-        synchronized (ConfigClass.GLOBAL_LOCK) {
+        synchronized (GlobalVariables.GLOBAL_LOCK) {
             loginUserMap.remove(userName);
             Statistics.getInstance().removeUserStatistics(userName);
         }
@@ -84,7 +82,7 @@ public class Users implements Serializable {
         if (loginUserMap.containsKey(newUserName) && !oldUserName.equals(newUserName))
             throw new UserAlreadyExistsException("User with login " + newUserName + " already exists");
 
-        synchronized (ConfigClass.GLOBAL_LOCK) {
+        synchronized (GlobalVariables.GLOBAL_LOCK) {
             User user = loginUserMap.get(oldUserName);
             loginUserMap.remove(oldUserName);
             user.setLogin(newUserName);

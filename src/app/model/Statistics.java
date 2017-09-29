@@ -1,6 +1,6 @@
 package app.model;
 
-import app.config.ConfigClass;
+import app.config.GlobalVariables;
 import app.utils.adapters.XmlStatisticsMapAdapter;
 import app.utils.adapters.XmlVotedMapAdapter;
 
@@ -35,9 +35,9 @@ public class Statistics implements Serializable {
 
         if (instance == null) {
             //TODO
-            File file = new File(ConfigClass.STORAGE_PATH + "\\statistics" + ConfigClass.SAVE_FILE_EXTENSION);
+            File file = new File(GlobalVariables.STORAGE_PATH + "\\statistics" + GlobalVariables.SAVE_FILE_EXTENSION);
             if (file.exists()) {
-                instance = ConfigClass.SERIALIZER.deserialize(Statistics.class, file);
+                instance = GlobalVariables.SERIALIZER.deserialize(Statistics.class, file);
                 if (instance.statisticsStorage.isEmpty() || instance.votedUsersStatistics.isEmpty())
                     instance = new Statistics();
             }

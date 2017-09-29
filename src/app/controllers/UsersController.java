@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.config.ConfigClass;
+import app.config.GlobalVariables;
 import app.model.Questionnaires;
 import app.model.Statistics;
 import app.model.User;
@@ -9,13 +9,11 @@ import exceptions.PasswordMismatchException;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
 
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -142,7 +140,7 @@ public class UsersController extends HttpServlet {
             throws ServletException, IOException {
         String userName = (String)req.getSession().getAttribute("user_name");
         if (userName != null)
-            synchronized (ConfigClass.GLOBAL_LOCK) {
+            synchronized (GlobalVariables.GLOBAL_LOCK) {
                 req.setAttribute("questionnaires", Questionnaires.getInstance().getNameQuestionnaireMap().keySet());
                 req.setAttribute("completed_questionnaires", Statistics.getInstance().getCompletedByUser(userName));
                 req.getRequestDispatcher("/WEB-INF/views/user_cabinet.jsp").forward(req, resp);
@@ -208,12 +206,12 @@ public class UsersController extends HttpServlet {
 
         boolean success = true;
 
-        if (!userName.matches(ConfigClass.LOGIN_REGEXP)) {
+        if (!userName.matches(GlobalVariables.LOGIN_REGEXP)) {
             req.setAttribute("login_error",
                     "Login should has length between 4 and 32 and should contains only symbols and digits");
             success = false;
         }
-        if (!password.matches(ConfigClass.PASSWORD_REGEXP)) {
+        if (!password.matches(GlobalVariables.PASSWORD_REGEXP)) {
             req.setAttribute("password_error",
                     "Password should has length between 4 and 16 and should contains only symbols and digits");
             success = false;
