@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "users")
-public class Users {
+public class Users implements Serializable {
 
     private static Users instance;
     @XmlElement()
@@ -30,9 +31,7 @@ public class Users {
 
         if (instance == null) {
             File file = new File(ConfigClass.STORAGE_PATH + "\\users" + ConfigClass.SAVE_FILE_EXTENSION);
-            String dir = new File("").getAbsolutePath();
-            System.out.println(dir);
-            if (file.exists() && file.getName().equals("users.xml"))
+            if (file.exists())
                 instance = ConfigClass.SERIALIZER.deserialize(Users.class, file);
             else
                 instance = new Users();
@@ -47,7 +46,7 @@ public class Users {
     public synchronized Users addUser(User user)
             throws UserAlreadyExistsException {
         if (isUserNameAlreadyExists(user.getLogin()))
-            throw new UserAlreadyExistsException("User with same login \"" + user.getLogin() + "\" already exists");
+            throw new UserAlreadyExistsException("User with login " + user.getLogin() + " already exists");
         else
             loginUserMap.put(user.getLogin(), user);
         return this;
@@ -71,7 +70,7 @@ public class Users {
     public synchronized void login(String userName, String password)
             throws UserNotFoundException, PasswordMismatchException {
         if (!isUserNameAlreadyExists(userName))
-            throw new UserNotFoundException("Wrong login");
+            throw new UserNotFoundException("User not found");
         else if (!loginUserMap.get(userName).getPassword().equals(password))
             throw new PasswordMismatchException("Wrong password");
     }

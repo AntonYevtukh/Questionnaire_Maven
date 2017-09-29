@@ -2,7 +2,9 @@ package app.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,10 +13,12 @@ import java.util.Set;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "answer")
-public class AnswerStatistics {
+public class AnswerStatistics implements Serializable {
 
+    @XmlElement(name = "percent")
     private double percent;
-    private Set<String> votedUsers;
+    @XmlElement(name = "voted_users")
+    private Set<String> votedUsers = new HashSet<>();
 
     public AnswerStatistics(AnswerStatistics originStatistics) {
         this.percent = originStatistics.percent;

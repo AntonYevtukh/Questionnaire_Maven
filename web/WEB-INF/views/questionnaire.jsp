@@ -15,11 +15,11 @@
 %>
 <html>
 <head>
-    <%@include file="/views/partials/meta.jsp" %>
+    <%@include file="/WEB-INF/views/partials/meta.jsp" %>
     <title><%=questionnaireName%></title>
 </head>
 <body>
-    <%@include file="/views/partials/header.jsp" %>
+    <%@include file="/WEB-INF/views/partials/header.jsp" %>
     <div class="main_area">
         <div class="content">
             <h2><%=questionnaireName%></h2>
@@ -43,6 +43,6 @@
             </form>
         </div>
     </div>
-    <%@include file="/views/partials/footer.jsp" %>
+    <%@include file="/WEB-INF/views/partials/footer.jsp" %>
 </body>
 </html>

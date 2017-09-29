@@ -11,11 +11,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="/views/partials/meta.jsp" %>
+    <%@include file="/WEB-INF/views/partials/meta.jsp" %>
     <title>Statistics</title>
 </head>
 <body>
-    <%@include file="/views/partials/header.jsp" %>
+    <%@include file="/WEB-INF/views/partials/header.jsp" %>
     <div class="main_area">
         <div class="content">
             <%
@@ -66,6 +66,6 @@
                 </div>
         </div>
     </div>
-    <%@include file="/views/partials/footer.jsp" %>
+    <%@include file="/WEB-INF/views/partials/footer.jsp" %>
 </body>
 </html>

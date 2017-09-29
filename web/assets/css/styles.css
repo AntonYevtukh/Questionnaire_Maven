@@ -24,7 +24,7 @@ h1 {
 }
 
 label{
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .header{
@@ -35,7 +35,7 @@ label{
     position: relative;
     background-color: #3B5998;
     border-width: 0px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #303030;
 }
 
 .logo{
@@ -55,7 +55,7 @@ label{
     position: relative;
     background-color: #3B5998;
     border-width: 0px;
-    border-top: 1px solid black;
+    border-top: 1px solid #303030;
 }
 
 .main_area{
@@ -73,7 +73,7 @@ label{
 
 .login_form{
     width: auto;
-    height: 320px;
+    height: 350px;
     position: relative;
     display: block;
     margin: auto;
@@ -110,7 +110,7 @@ h2{
 .login_form_container{
     transform: translateY(-32px);
     width: 30%;
-    height: 320px;
+    height: 400px;
     box-sizing: content-box;
     position: absolute;
     margin: auto;
@@ -132,6 +132,8 @@ h2{
 
 .text_input{
     display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
     box-sizing: border-box;
     font-size: 20px;
     height: 30px;
@@ -140,10 +142,15 @@ h2{
     width: 100%;
     border-radius: 5px;
     border: 2px solid #3B5998;
+    color: #303030;
 }
 
-.text_input:active {
+.text_input:active, text_input:focus {
     box-shadow: inset 0 0 2px #3B5998;
+}
+
+.text_input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0 30px rgba(59, 89, 152, 0.1) inset !important;
 }
 
 .button_container{
@@ -169,6 +176,11 @@ h2{
 
 .button:hover{
     box-shadow: 0 0 2px #3B5998;
+    cursor: hand;
+}
+
+.button:focus, .button:active {
+    border: none;
 }
 
 #sign_in{
@@ -206,8 +218,8 @@ h2{
 .error{
     display: inline-block;
     font-size: 14px;
-    min-height: 16px;
-    margin: 4px;
+    height: 32px;
+    margin: 2px;
     width: 100%;
     font-family: 'Ubuntu', sans-serif;
     color: firebrick;
@@ -283,7 +295,7 @@ input[type=radio]{
     position: relative;
     left: 0px;
     top: 0px;
-    color: black;
+    color: #303030;
     margin: 0px;
     vertical-align: middle;
     overflow-wrap: break-word;
@@ -364,7 +376,7 @@ input[type=radio]{
     margin: 0px 10px;
     height: 20px;
     line-height: 16px;
-    color: black;
+    color: #303030;
     float: right;
     font-size: 16px;
 }
@@ -374,7 +386,7 @@ input[type=radio]{
     margin: 0px 10px 0px 0px;
     height: 20px;
     line-height: 20px;
-    color: black;
+    color: #303030;
     float: right;
 }
 
@@ -409,4 +421,11 @@ input[type=radio]{
     height: 20px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    color: #303030;
+    transition: background-color 5000s ease-in-out 0s;
+}
 

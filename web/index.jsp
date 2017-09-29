@@ -8,11 +8,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <%@include file="/views/partials/meta.jsp" %>
+  <%@include file="/WEB-INF/views/partials/meta.jsp" %>
   <title>Questionnaire</title>
 </head>
 <body>
-<%@include file="/views/partials/header.jsp" %>
+<%@include file="WEB-INF/views/partials/header.jsp" %>
 <%
   if(session.getAttribute("user_name") != null) {
     response.sendRedirect("/users?type=show_cabinet");
@@ -29,13 +29,13 @@
         <input class="text_input" type="password" name="password" value="${prev_password}"><br>
         <label class="error">${password_error}</label><br>
         <div class="button_container">
-          <input class="button" id="sign_in" type="submit" value="Sign in"/>
-          <div class="button" id="sign_up"><a class="button_link" href="/views/new_user.jsp">Sign Up</a></div>
+          <input class="button" id="sign_in" type="submit" value="Sign In"/>
+          <div class="button" id="sign_up"><a class="button_link" href="/users?type=new_user">Sign Up</a></div>
         </div>
       </form>
     </div>
   </div>
-  <%@include file="/views/partials/footer.jsp" %>
+  <%@include file="/WEB-INF/views/partials/footer.jsp" %>
   </body>
 </html>
 

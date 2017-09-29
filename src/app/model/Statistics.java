@@ -1,15 +1,16 @@
 package app.model;
 
 import app.config.ConfigClass;
-import app.utils.XmlSerializer;
-import com.sun.javafx.UnmodifiableArrayList;
+import app.utils.adapters.XmlStatisticsMapAdapter;
+import app.utils.adapters.XmlVotedMapAdapter;
 
-import javax.servlet.ServletException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,54 +20,64 @@ import java.util.stream.Collectors;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "statistics")
-public class Statistics {
+public class Statistics implements Serializable {
 
     private static Statistics instance;
-    @XmlElement(name = "questionnaire_statistics")
-    private Map<String, List<List<AnswerStatistics>>> statisticsStorage;
+
+    @XmlJavaTypeAdapter(XmlVotedMapAdapter.class)
     @XmlElement(name = "voted_users_statistics")
-    private Map<String, Set<String>> votedUsersStatistics;
+    private Map<String, Set<String>> votedUsersStatistics = new HashMap<>();
+    @XmlJavaTypeAdapter(XmlStatisticsMapAdapter.class)
+    @XmlElement(name = "questionnaire_statistics")
+    private Map<String, List<List<AnswerStatistics>>> statisticsStorage = new HashMap<>();
 
     public static Statistics getInstance() {
 
         if (instance == null) {
             //TODO
             File file = new File(ConfigClass.STORAGE_PATH + "\\statistics" + ConfigClass.SAVE_FILE_EXTENSION);
-            if (file.exists())
+            if (file.exists()) {
                 instance = ConfigClass.SERIALIZER.deserialize(Statistics.class, file);
+                if (instance.statisticsStorage.isEmpty() || instance.votedUsersStatistics.isEmpty())
+                    instance = new Statistics();
+            }
             else
-                instance = new Statistics(true);
+                instance = new Statistics();
+            instance.addEmptyStatistics();
         }
         return instance;
     }
 
-    //Для сериализатора
     private Statistics() {
 
     }
 
-    //По прямому назначению
-    private Statistics(boolean load) {
-        Questionnaires questionnaires = Questionnaires.getInstance();
-        Set<String> questionnaireNames = questionnaires.getNameQuestionnaireMap().keySet();
-        votedUsersStatistics = new HashMap<>();
-        for (String questionnaireName : questionnaires.getNameQuestionnaireMap().keySet()) {
+    public synchronized void addEmptyStatistics() {
+
+        Set<String> questionnaireNames = new HashSet(Questionnaires.getInstance().getNameQuestionnaireMap().keySet());
+        questionnaireNames.removeAll(statisticsStorage.keySet());
+
+        for (String questionnaireName : questionnaireNames) {
             votedUsersStatistics.put(questionnaireName, new HashSet<>());
         }
 
+        Questionnaires questionnaires = Questionnaires.getInstance();
+        Map<String, List<List<AnswerStatistics>>> emptyStatisticsMap;
+
         //Через Stream API, но ничего не понятно
-        statisticsStorage = questionnaireNames.stream().collect(
+        emptyStatisticsMap = questionnaireNames.stream().collect(
                 Collectors.toMap(Function.identity(), (String questionnaireName) ->
-                    questionnaires.getNameQuestionnaireMap().get(questionnaireName).
-                            getQuestions().stream().map((Question question) ->
+                        questionnaires.getNameQuestionnaireMap().get(questionnaireName).
+                                getQuestions().stream().map((Question question) ->
                                 question.getAnswers().stream().map((String answer) -> new AnswerStatistics()).
                                         collect(Collectors.toCollection(ArrayList::new))
-                    ).collect(Collectors.toCollection(ArrayList::new))
+                        ).collect(Collectors.toCollection(ArrayList::new))
                 ));
-        //TODO Дописать добавление пустой статистики при добавлении опросников
+        statisticsStorage.putAll(emptyStatisticsMap);
+
         /*Через for, но дольше
         for (String questionnaireName : questionnaireNames) {
-            Questionnaire questionnaire = questionnaires.getNameQuestionaireMap().get(questionnaireName);
+            Questionnaire questionnaire = questionnaires.getNameQuestionnaireMap().get(questionnaireName);
             List<List<AnswerStatistics>> questionnaireStatistics = new ArrayList<>();
             for (Question question : questionnaire.getQuestions()) {
                 List<AnswerStatistics> questionStatistics = new ArrayList<>();

@@ -1,6 +1,7 @@
 package app.model;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "question")
-public class Question {
+public class Question implements Serializable {
 
     @XmlAttribute(name = "body")
     private String body;

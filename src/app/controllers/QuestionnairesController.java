@@ -44,7 +44,7 @@ public class QuestionnairesController extends HttpServlet {
         String questionnaireName = req.getParameter("questionnaire_name");
         Questionnaire questionnaire = Questionnaires.getInstance().getNameQuestionnaireMap().get(questionnaireName);
         req.setAttribute("questionnaire", questionnaire);
-        req.getRequestDispatcher("views/questionnaire.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/questionnaire.jsp").forward(req, resp);
     }
 
     private void showStatistics(HttpServletRequest req, HttpServletResponse resp)
@@ -67,7 +67,7 @@ public class QuestionnairesController extends HttpServlet {
         req.setAttribute("questionnaire_statistics", questionnaireStatistics);
         req.setAttribute("totally_votes", totallyVotes);
         req.setAttribute("top_answers", topAnswerNumbers);
-        req.getRequestDispatcher("/views/show_statistics.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/show_statistics.jsp").forward(req, resp);
     }
 
     private void submitQuestionnaire(HttpServletRequest req, HttpServletResponse resp)

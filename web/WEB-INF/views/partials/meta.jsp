@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/assets/css/bootstrap.css?<%=LocalDateTime.now()%>">
 <link href="/assets/css/styles.css?<%=LocalDateTime.now()%>" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet">
 
 
 

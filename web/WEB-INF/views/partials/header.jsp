@@ -15,7 +15,7 @@
     <div class="user_panel">
         <i class="glyphicon glyphicon-user" style="color: whitesmoke; font-size: 16px"></i>
         <label class="user"><%=session.getAttribute("user_name")%></label>
-        <a href="/views/edit_user.jsp" class="header_link">
+        <a href="/users?type=edit" class="header_link">
             <i class="glyphicon glyphicon-edit" style="color: whitesmoke; font-size: 16px; margin: 0 0 0 4px"></i>
         </a>
         <a href="/users?type=remove" class="header_link">

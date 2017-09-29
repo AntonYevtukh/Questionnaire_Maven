@@ -4,6 +4,7 @@ import app.config.ConfigClass;
 import app.utils.XmlSerializer;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Anton on 22.09.2017.
  */
-public class Questionnaires {
+public class Questionnaires implements Serializable {
 
     private static Questionnaires instance;
     private Map<String, Questionnaire> nameQuestionnaireMap;
@@ -23,7 +24,6 @@ public class Questionnaires {
         if (instance == null) {
             //TODO
             File directory = new File(ConfigClass.QUESTIONNAIRE_PATH);
-            System.out.println(directory.getAbsolutePath());
             if (directory.exists() && directory.isDirectory()) {
                 instance = new Questionnaires(directory.listFiles((File dir, String name) ->
                         name.endsWith(ConfigClass.SAVE_FILE_EXTENSION)));

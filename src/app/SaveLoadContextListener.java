@@ -20,6 +20,7 @@ public class SaveLoadContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         //TODO Data integrity
+        Questionnaires.getInstance();
         Users.getInstance();
         Statistics.getInstance();
 

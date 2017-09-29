@@ -1,6 +1,7 @@
 <%@ page import="app.model.Questionnaire" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.Enumeration" %><%--
+<%@ page import="java.util.Enumeration" %>
+<%@ page import="java.util.TreeSet" %><%--
   Created by IntelliJ IDEA.
   User: Anton
   Date: 23.09.2017
@@ -10,17 +11,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="/views/partials/meta.jsp" %>
+    <%@include file="/WEB-INF/views/partials/meta.jsp" %>
     <title>Questionnaires</title>
 </head>
 <body>
-    <%@include file="/views/partials/header.jsp" %>
+    <%@include file="/WEB-INF/views/partials/header.jsp" %>
     <div class="main_area">
         <div class="content">
             <h2>Questionnaires</h2>
             <table class="questionnaire_table">
             <%
-                Set<String> questionnaires = (Set<String>)request.getAttribute("questionnaires");
+                Set<String> questionnaires = new TreeSet<>((Set<String>)request.getAttribute("questionnaires"));
                 Set<String> completedQuestionnaires = (Set<String>)request.getAttribute("completed_questionnaires");
                 for (String questionnaire : questionnaires) {
             %>
@@ -51,6 +52,6 @@
                 </table>
             </div>
     </div>
-    <%@include file="/views/partials/footer.jsp" %>
+    <%@include file="/WEB-INF/views/partials/footer.jsp" %>
 </body>
 </html>
